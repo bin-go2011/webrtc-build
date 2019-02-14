@@ -71,8 +71,6 @@ ExternalProject_Add(
     libwebrtc
     DEPENDS webrtc-build
 
-    INSTALL_COMMAND ""
-
     INSTALL_DIR ${CMAKE_BINARY_DIR}
     SOURCE_DIR ${CMAKE_SOURCE_DIR}/libwebrtc
     BINARY_DIR ${CMAKE_BINARY_DIR}/libwebrtc
@@ -84,7 +82,14 @@ ExternalProject_Add(
     -DINSTALL_CMAKE_DIR:PATH=${CMAKE_BINARY_DIR}/lib/cmake/LibWebRTC
     -DTARGET_OS:STRING=${TARGET_OS}
     -DWEBRTC_OUTPUT_DIR:PATH=${WEBRTC_ROOT_PATH}/out/${_CONFIG}
+    -DWEBRTC_SOURCE_DIR:PATH=${WEBRTC_ROOT_PATH}
 )
 
-
+add_custom_target(
+    update-include-dir
+    ALL
+    COMMAND ${CMAKE_COMMAND} -E rename "include/src" "include/webrtc"
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    DEPENDS libwebrtc
+)
   
