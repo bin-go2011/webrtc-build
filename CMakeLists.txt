@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 project(webrtc-build)
 
-if ("${WEBRTC_ROOT_PATH}" STREQUAL "" )
-    message(FATAL_ERROR "\"$\{WEBRTC_ROOT_PATH\}\" can not be empty")
+if ( "${WEBRTC_ROOT_PATH}" STREQUAL "")
+    message(FATAL_ERROR "A WEBRTC_ROOT_PATH is requred. \n"
+                        " ex) cmake .. -WEBRTC_ROOT_PATH=/dir/webrtc-checkout/src \n")
 endif()
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
@@ -84,6 +85,7 @@ ExternalProject_Add(
     -DINSTALL_CMAKE_DIR:PATH=${CMAKE_BINARY_DIR}/lib/cmake/LibWebRTC
     -DTARGET_OS:STRING=${TARGET_OS}
     -DWEBRTC_OUTPUT_DIR:PATH=${WEBRTC_ROOT_PATH}/out/${_CONFIG}
+    -DWEBRTC_SOURCE_DIR:PATH=${WEBRTC_ROOT_PATH}
 )
 
 
