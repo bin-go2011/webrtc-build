@@ -46,3 +46,11 @@ install(DIRECTORY ${WEBRTC_SOURCE_DIR}
         DESTINATION "include"
         FILES_MATCHING PATTERN "*.h")
 
+#
+# Install library
+install(TARGETS webrtc
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib
+        INCLUDES DESTINATION include)
+
