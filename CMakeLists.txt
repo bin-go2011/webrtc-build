@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.5)
 project(webrtc-build)
 
+if ("${WEBRTC_ROOT_PATH}" STREQUAL "" )
+    message(FATAL_ERROR "\"${WEBRTC_ROOT_PATH}\" should not be empty")
+endif()
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
     ${CMAKE_SOURCE_DIR}/CMakeModules)
 
@@ -33,30 +37,24 @@ if (NOT HAS_OWN_DEPOT_TOOLS)
   set(DEPOT_TOOLS_PATH ${CMAKE_BINARY_DIR}/depot_tools/src/depot-tools)
 endif (NOT HAS_OWN_DEPOT_TOOLS)
 
-include(LibWebRTCCommand)
+include(Gn)
 
-if (NOT "${WEBRTC_ROOT_PATH}" STREQUAL "" )
-    include(Gn)
+libwebrtc_command(
+    NAME webrtc-generate
+    COMMAND ${_GEN_COMMAND}
+    WORKING_DIRECTORY "${WEBRTC_ROOT_PATH}"
+    COMMENT "Generating build files"
+    DEPENDS ${_NEXT_DEPENDS}
+)
 
-    libwebrtc_command(
-        NAME webrtc-generate
-        COMMAND ${_GEN_COMMAND}
-        WORKING_DIRECTORY "${WEBRTC_ROOT_PATH}"
-        COMMENT "Generating build files"
-        DEPENDS ${_NEXT_DEPENDS}
-    )
+set(_NINJA_COMMAND ninja ${NINJA_ARGS} -C ${_NINJA_BUILD_DIR})
 
-    set(_NINJA_COMMAND ninja ${NINJA_ARGS} -C ${_NINJA_BUILD_DIR})
+libwebrtc_command(
+    NAME webrtc-build
+    COMMAND ${_NINJA_COMMAND}
+    WORKING_DIRECTORY "${WEBRTC_ROOT_PATH}"
+    COMMENT "Running ninja"
+    DEPENDS webrtc-generate
+)
 
-    libwebrtc_command(
-        NAME webrtc-build
-        COMMAND ${_NINJA_COMMAND}
-        WORKING_DIRECTORY "${WEBRTC_ROOT_PATH}"
-        COMMENT "Running ninja"
-        DEPENDS webrtc-generate
-    )
-
-else()
-    message(STATUS "empty webrtc root path")
-endif()
   
