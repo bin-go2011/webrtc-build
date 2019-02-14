@@ -63,6 +63,8 @@ ExternalProject_Add(
     libwebrtc
     DEPENDS webrtc-build
 
+    INSTALL_COMMAND ""
+
     INSTALL_DIR ${CMAKE_BINARY_DIR}
     SOURCE_DIR ${CMAKE_SOURCE_DIR}/libwebrtc
     BINARY_DIR ${CMAKE_BINARY_DIR}/libwebrtc
