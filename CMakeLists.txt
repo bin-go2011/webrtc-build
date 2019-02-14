@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 project(webrtc-build)
 
 if ("${WEBRTC_ROOT_PATH}" STREQUAL "" )
-    message(FATAL_ERROR "\"${WEBRTC_ROOT_PATH}\" should not be empty")
+    message(FATAL_ERROR "\"$\{WEBRTC_ROOT_PATH\}\" can not be empty")
 endif()
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
