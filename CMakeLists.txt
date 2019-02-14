@@ -12,6 +12,7 @@ find_package(Git REQUIRED)
 find_package(PythonInterp 2.7 REQUIRED)
 
 include(Options)
+include(TargetOsAndCpu)
 
 if (HAS_OWN_DEPOT_TOOLS)
   find_package(DepotTools REQUIRED)
@@ -57,5 +58,24 @@ libwebrtc_command(
     COMMENT "Running ninja"
     DEPENDS webrtc-generate
 )
+
+ExternalProject_Add(
+    libwebrtc
+    DEPENDS webrtc-build
+
+    INSTALL_DIR ${CMAKE_BINARY_DIR}
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/libwebrtc
+    BINARY_DIR ${CMAKE_BINARY_DIR}/libwebrtc
+
+    CMAKE_ARGS
+    -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+    -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_BINARY_DIR}
+    -DCMAKE_MODULE_PATH:PATH=${CMAKE_MODULE_PATH}
+    -DINSTALL_CMAKE_DIR:PATH=${CMAKE_BINARY_DIR}/lib/cmake/LibWebRTC
+    -DTARGET_OS:STRING=${TARGET_OS}
+    -DWEBRTC_OUTPUT_DIR:PATH=${CMAKE_BINARY_DIR}/webrtc/src/out/${_CONFIG}
+    -DWEBRTC_SOURCE_DIR:PATH=${CMAKE_BINARY_DIR}/webrtc/src/webrtc
+)
+
 
   
