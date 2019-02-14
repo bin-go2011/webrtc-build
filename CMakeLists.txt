@@ -39,8 +39,8 @@ if (NOT "${WEBRTC_ROOT_PATH}" STREQUAL "" )
 
     libwebrtc_command(
         NAME webrtc-generate
-        COMMAND pwd
-        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+        COMMAND gn gen out/Default1
+        WORKING_DIRECTORY "${WEBRTC_ROOT_PATH}"
         COMMENT "Generating build files"
         DEPENDS ${_NEXT_DEPENDS}
     )
