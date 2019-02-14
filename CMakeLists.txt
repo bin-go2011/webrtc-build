@@ -93,4 +93,20 @@ add_custom_target(
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     DEPENDS libwebrtc
 )
+
+#
+# Install library
+file(GLOB_RECURSE _LIBRARY_FILES
+     ${CMAKE_BINARY_DIR}/lib/*${CMAKE_STATIC_LIBRARY_SUFFIX})
+
+install(FILES ${_LIBRARY_FILES}
+        DESTINATION ${INSTALL_LIB_DIR}
+        COMPONENT lib)
+
+#
+# Install headers
+install(DIRECTORY "${CMAKE_BINARY_DIR}/include/"
+        DESTINATION ${INSTALL_INCLUDE_DIR}
+        COMPONENT include
+        FILES_MATCHING PATTERN "*.h")
   
