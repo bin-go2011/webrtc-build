@@ -38,6 +38,7 @@ if (NOT HAS_OWN_DEPOT_TOOLS)
 endif (NOT HAS_OWN_DEPOT_TOOLS)
 
 include(Gn)
+include(LibWebRTCCommand)
 
 libwebrtc_command(
     NAME webrtc-generate
