@@ -38,3 +38,11 @@ set_source_files_properties(${_OBJ_FILES} PROPERTIES
 set_target_properties(webrtc PROPERTIES
                       LINKER_LANGUAGE C
                       LIBRARY_OUTPUT_DIRECTORY ${WEBRTC_OUTPUT_DIR})
+
+
+#
+# Install headers
+install(DIRECTORY ${WEBRTC_SOURCE_DIR}
+        DESTINATION "include"
+        FILES_MATCHING PATTERN "*.h")
+
