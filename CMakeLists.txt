@@ -90,4 +90,20 @@ get_filename_component(_fullpath ${CMAKE_BINARY_DIR}/include/src REALPATH)
 if (EXISTS "${_fullpath}")
    file(RENAME ${CMAKE_BINARY_DIR}/include/src ${CMAKE_BINARY_DIR}/include/webrtc)
 endif()
+
+#
+# Install library
+file(GLOB_RECURSE _LIBRARY_FILES
+     ${CMAKE_BINARY_DIR}/lib/*${CMAKE_STATIC_LIBRARY_SUFFIX})
+
+install(FILES ${_LIBRARY_FILES}
+        DESTINATION ${INSTALL_LIB_DIR}
+        COMPONENT lib)
+
+#
+# Install headers
+install(DIRECTORY "${CMAKE_BINARY_DIR}/include/"
+        DESTINATION ${INSTALL_INCLUDE_DIR}
+        COMPONENT include
+        FILES_MATCHING PATTERN "*.h")
   
