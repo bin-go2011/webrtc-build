@@ -3,7 +3,7 @@ project(webrtc-build)
 
 if ( "${WEBRTC_ROOT_PATH}" STREQUAL "")
     message(FATAL_ERROR "A WEBRTC_ROOT_PATH is requred. \n"
-                        " ex) cmake .. -WEBRTC_ROOT_PATH=/dir/webrtc-checkout/src \n")
+                        " ex) cmake .. -DWEBRTC_ROOT_PATH=/dir/webrtc-checkout/src -DCMAKE_BUILD_TYPE=Debug|Release\n")
 endif()
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
