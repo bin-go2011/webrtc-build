@@ -86,13 +86,10 @@ ExternalProject_Add(
     -DWEBRTC_SOURCE_DIR:PATH=${WEBRTC_ROOT_PATH}
 )
 
-add_custom_target(
-    update-include-dir
-    ALL
-    COMMAND ${CMAKE_COMMAND} -E rename "include/src" "include/webrtc"
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    DEPENDS libwebrtc
-)
+get_filename_component(_fullpath ${CMAKE_BINARY_DIR}/include/src REALPATH)
+if (EXISTS "${_fullpath}")
+   file(RENAME ${CMAKE_BINARY_DIR}/include/src ${CMAKE_BINARY_DIR}/include/webrtc)
+endif()
 
 #
 # Install library
