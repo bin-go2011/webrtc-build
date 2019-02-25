@@ -49,7 +49,7 @@ install(DIRECTORY ${WEBRTC_SOURCE_DIR}
 #
 # Install library
 install(TARGETS webrtc
-        ARCHIVE DESTINATION lib
+        ARCHIVE DESTINATION lib/${CMAKE_BUILD_TYPE}
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         INCLUDES DESTINATION include)
