@@ -1,4 +1,5 @@
 set(_GEN_ARGS use_gold=false target_cpu=\\"${TARGET_CPU}\\" target_os=\\"${TARGET_OS}\\" is_component_build=false)
+set(_GEN_ARGS ${_GEN_ARGS} rtc_enable_protobuf=false use_custom_libcxx=false rtc_include_pulse_audio=false rtc_build_examples=false rtc_build_tools=false is_clang=false treat_warnings_as_errors=false)
 
 if (MSVC OR XCODE)
   set(_GEN_ARGS ${_GEN_ARGS} is_debug=$<$<CONFIG:Debug>:true>$<$<CONFIG:Release>:false>$<$<CONFIG:RelWithDebInfo>:false>$<$<CONFIG:MinSizeRel>:false>)
@@ -28,3 +29,4 @@ else (WIN32)
 endif (WIN32)
 
 set(_GEN_COMMAND ${_GN_EXECUTABLE} gen ${_NINJA_BUILD_DIR} --args=\"${_GEN_ARGS}\")
+FILE(WRITE ${_NINJA_BUILD_DIR}/args.gn ${_GEN_ARGS})
