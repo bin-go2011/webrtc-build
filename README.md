@@ -4,6 +4,6 @@ cmake .. -D WEBRTC_ROOT_PATH=<path/to/webrtc/build/src> -D CMAKE_BUILD_TYPE=<Deb
 
 use_custom_libcxx=false  
 rtc_build_tools=true  
-is_clang=true  
+is_clang=true (for Mac build)  
 rtc_include_tests=true  
 
