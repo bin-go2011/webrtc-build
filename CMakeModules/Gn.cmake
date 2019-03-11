@@ -1,5 +1,5 @@
 set(_GEN_ARGS use_gold=false target_cpu=\\"${TARGET_CPU}\\" target_os=\\"${TARGET_OS}\\" is_component_build=false)
-set(_GEN_ARGS ${_GEN_ARGS} rtc_enable_protobuf=false use_custom_libcxx=false rtc_include_pulse_audio=false rtc_build_examples=false rtc_build_tools=false is_clang=false treat_warnings_as_errors=false)
+set(_GEN_ARGS ${_GEN_ARGS} rtc_enable_protobuf=false use_custom_libcxx=false rtc_build_examples=false rtc_build_tools=true is_clang=true treat_warnings_as_errors=false)
 
 if (MSVC OR XCODE)
   set(_GEN_ARGS ${_GEN_ARGS} is_debug=$<$<CONFIG:Debug>:true>$<$<CONFIG:Release>:false>$<$<CONFIG:RelWithDebInfo>:false>$<$<CONFIG:MinSizeRel>:false>)
